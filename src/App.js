@@ -1,25 +1,31 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import AddressInput from './components/AddressInput';
+import AddressTestResults from './components/AddressTestResults';
 import './App.css';
 
+let {EventEmitter} = require('fbemitter');
+window.ee = new EventEmitter();
+
 class App extends Component {
+	constructor(props)
+	{
+		super(props);
+		let currentVersion = 7;
+		let storageVersion = JSON.parse(localStorage.getItem('version'));
+		if ((storageVersion === null) || (storageVersion < currentVersion)) {
+			localStorage.setItem('version', JSON.stringify(currentVersion));
+			localStorage.setItem('address', '');
+		}
+	}
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+	        <h1>OpenAlias Tester</h1>
         </header>
+        <AddressInput />
+	      <AddressTestResults />
       </div>
     );
   }
