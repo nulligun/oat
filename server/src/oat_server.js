@@ -153,6 +153,6 @@ function lookup(request, response, next) {
 server.use(restify.plugins.bodyParser());
 server.post('/lookup', lookup);
 
-server.listen(5000, function () {
+server.listen(8044, function () {
 	console.log('%s listening at %s', server.name, server.url);
 });

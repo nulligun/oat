@@ -18,6 +18,10 @@ A request is sent to the API which performs a lookup using Google DNS over HTTP.
 
 The API documentation is a work in progress. The plan is to move the API from to it's own repo and provide a npm package to make it easy to use in JS apps.
 
+## Running your own
+
+Currently you'll need to generate your own private key if you want to run an API server. The server needs to use Google DNS for it's lookups. Don't run the server in it's current state without replacing the private key in oat_server.js. This will be easier to setup when I have a bit more time.
+
 
 ## References Used
 
