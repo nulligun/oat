@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "jsrsasign": "^8.0.12"
+    "jsrsasign": "^8.0.12",
+    "restify": "^7.2.2"
   }
 }
