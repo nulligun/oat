@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import AddressInput from './components/AddressInput';
 import AddressTestResults from './components/AddressTestResults';
+import TextCrc32 from './components/TextCrc32';
+import TextSigner from './components/TextSigner';
 import './App.css';
 
 let {EventEmitter} = require('fbemitter');
@@ -26,6 +28,8 @@ class App extends Component {
         </header>
         <AddressInput />
 	      <AddressTestResults />
+	      <TextSigner />
+	      <TextCrc32 />
       </div>
     );
   }
