@@ -1,95 +1,51 @@
 import React, { Component } from 'react';
-
-const CRC32 = require('crc-32');
-const Web3 = require('web3');
-const util = require('ethereumjs-util')
+import { ListGroupItem, Button } from 'reactstrap';
+import CoinImage from './CoinImage';
+import CoinDetails from './CoinDetails';
+import RecordSafety from './RecordSafety';
 
 class AddressTestResultItem extends Component {
-	constructor(props) {
+	constructor(props)
+	{
 		super(props);
-
-		let state = {};
-		if ('address_signature' in props.record.properties)
-		{
-			state.signatureValid = 'Checking...';
-		} else {
-			state.signatureValid = 'Missing';
-		}
-		if ('checksum' in props.record.properties)
-		{
-			state.checksumValid = 'Checking...';
-		} else {
-			state.checksumValid = 'Missing';
-		}
-		this.state = state;
-	}
-
-	verifySignature(record)
-	{
-		let signatureValid = 'Missing';
-		if ('address_signature' in record.properties)
-		{
-			if (record.currency === 'ella') {
-				signatureValid = 'Checking...';
-			} else {
-				signatureValid = 'Unknown';
-			}
-		}
-		this.setState({
-			signatureValid: signatureValid
+		this.detailsRef = React.createRef();
+		let self = this;
+		window.ee.addListener('itemClose', function(index) {
+			if (index === self.props.dataKey) self.detailsRef.current.itemClose();
 		});
-
-		if (record.currency === 'ella') {
-			let self = this;
-			window.web3.personal.ecRecover(record.domain, record.properties.address_signature, function (error, result) {
-				if (error) throw error;
-				self.setState({signatureValid: (result.toLowerCase() === record.properties.recipient_address.toLowerCase()) ? 'Valid' : 'Not Valid'});
-			});
-		}
-	}
-
-	componentDidMount()
-	{
-		if ('address_signature' in this.props.record.properties) {
-			this.verifySignature(this.props.record);
-		}
-		if ('checksum' in this.props.record.properties) {
-			this.checksum(this.props.record);
-		}
-	}
-
-	componentDidUpdate(prevProps, prevState, snapshot)
-	{
-		if (prevProps.record.address_signature !== this.props.record.address_signature)
-		{
-			this.verifySignature(this.props.record);
-		}
-
-		if (prevProps.record.checksum !== this.props.record.checksum)
-		{
-			this.checksum(this.props.record);
-		}
-	}
-
-	checksum(record)
-	{
-		let raw = record.txt.replace(/\s+checksum=.*$/, '').trim();
-		let crc32 = CRC32.str(raw).toString();
-		this.setState({checksumValid: (crc32 === record.properties.checksum) ? 'Valid' : 'Not Valid'});
-	}
-
-	details(record)
-	{
-		return record.properties.recipient_name + record.properties.recipient_address;
+		window.ee.addListener('itemOpen', function(index) {
+			if (index === self.props.dataKey) self.detailsRef.current.itemOpen();
+		});
 	}
 
 	render() {
-		return (<tr className="payload-row">
-				<td>{this.props.record.currency}</td>
-				<td>{this.details(this.props.record)}</td>
-				<td>{this.state.signatureValid}</td>
-				<td>{this.state.checksumValid}</td>
-			</tr>
+		return (<ListGroupItem color={this.props.score < 4 ? "danger" : "normal"} onClick={this.props.itemClicked}>
+				<div className="outer-container">
+					<div className="outer-column-1">
+						<div className="inner-container-2">
+							<div className="inner-column-2a">
+								<div className="coin-name"><small>{this.props.info && this.props.info.name}</small></div>
+								<CoinImage record={this.props.record} info={this.props.info} />
+							</div>
+						</div>
+					</div>
+					<div className="outer-column-2">
+						<div className="inner-container-2">
+							<RecordSafety score={this.props.score} />
+						</div>
+					</div>
+					<div className="outer-column-3">
+						<div className="inner-container">
+							<div className="inner-column-1">
+								<div className="recipient-name"><p>{this.props.record.properties.recipient_name}</p></div>
+							</div>
+							<div className="inner-column-2">
+								<CoinDetails ref={this.detailsRef} problems={this.props.problems} record={this.props.record} info={this.props.info} />
+							</div>
+						</div>
+					</div>
+				</div>
+			</ListGroupItem>
 		);
 	}
 }

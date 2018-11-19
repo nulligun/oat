@@ -1,10 +1,351 @@
 .App {
+    text-align: left;
+}
+
+.App .nav-item {
+    cursor: pointer;
+}
+
+.App .pill-wrapper .nav-item a.active:hover {
+    color: white;
+}
+
+.App .tab-content {
+    padding-top: 20px;
+}
+
+.title-spacer {
+    height: 5.1rem;
+}
+
+.title {
+    float: right;
+    display: table;
+}
+
+.title h1 {
+    padding-right: 20px;
+    text-align: left;
+    height: 4.5rem;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.App .nav-pills {
+    float: left;
+    padding: 20px;
+}
+
+.pill-wrapper {
+    border: solid 1px #ddd;
+    border-top: none;
+}
+
+.payload {
+    margin-top:20px;
+}
+
+.address-bar {
+    display: flex;
+    border: solid 1px #dddddd;
+}
+
+.address-input input, .address-input input:focus {
+    padding: 30px;
+    padding-left: 10px;
+    font-size: 1.5rem;
+    text-align: left;
+    display: inline-block;
+    border: none;
+    box-shadow: none;
+    outline: none;
+}
+
+.recipient-address {
+    word-wrap: break-word;
+}
+
+.circle-outer {
+    border-radius: 64px;
+    width: 64px;
+    height: 64px;
+    color: #20a220;
+    border: solid 4px #20a220;
+}
+
+.circle-outer p {
+    position: relative;
+    top: -4px;
+    left: 1px;
+    font-size: 42px;
+    font-weight: bold;
     text-align: center;
 }
 
-.address-input input {
-    width: 55%;
-    padding: 10px;
-    font-size: 1.5rem;
+.octagon-outer {
+    top: -2px;
+    position: relative;
+    transform: rotate(-45deg);
+    overflow: hidden;
+}
+
+.octagon-inner {
+    transform: rotate(45deg);
+    background: #ef0707;
     text-align: center;
+    color: white;
+    width: 60px;
+    height: 60px;
+}
+
+.octagon-inner p {
+    position: relative;
+    top: -8px;
+    font-size: 50px;
+    font-weight: bolder;
+}
+
+.triangle-outer {
+    margin-bottom: 10px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 32.5px 56.3px 32.5px;
+    border-color: transparent transparent #ffaa00 transparent;
+}
+
+.triangle-outer p {
+    position: relative;
+    font-size: 42px;
+    color: #edf4fd;
+    left: -13px;
+    top: 5px;
+}
+
+.outer-container {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 14px;
+    flex-wrap: nowrap;
+}
+
+.outer-column-1 {
+    flex: 0 0 64px;
+    padding-right: 16px;
+}
+
+.outer-column-2 {
+    flex: 0 0 64px;
+    padding-right: 16px;
+}
+
+.outer-column-3 {
+    min-width: 0;
+    word-wrap: break-word;
+}
+
+.inner-container {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+}
+
+.inner-container-2 {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+}
+
+.record-safety {
+    margin-top: auto;
+}
+
+.inner-column-1 {
+}
+
+.inner-column-2a {
+    margin-top: auto;
+}
+
+.coin-name {
+    text-align: center;
+}
+.coin-logo {
+    text-align: center;
+}
+
+.coin-name small {
+    font-weight: bolder;
+}
+
+.recipient-name {
+    font-weight: bolder;
+}
+.detail-container {
+    margin-top: 20px;
+}
+.prop-key {
+    font-style: italic;
+}
+
+.prop-e {
+    font-weight: bold;
+}
+
+.problems {
+    margin-top: 10px;
+}
+
+.problems ol, .problem ol li {
+    margin-left: 0;
+    padding-left: 15px;
+}
+
+.problems h5 {
+    color: #ef0707;
+}
+
+.no-problems {
+    color: green;
+    font-weight: bold;
+}
+
+.list-group-item:hover {
+    background-color: #f1f1f1;
+}
+
+.container .tab-content textarea {
+    resize: none;
+    height: 125px;
+}
+
+.checksum
+{
+    text-align: center;
+    padding: 40px;
+    background-color: #ddf7ff;
+    font-weight: bold;
+    font-size: 32px;
+}
+
+.signature {
+    word-wrap: break-word;
+    padding: 40px;
+    background-color: #cae2f7;
+    text-align: left;
+    font-weight: bold;
+    font-size: 32px;
+}
+
+.sym {
+    font-weight: bold;
+    font-size: 24px;
+    width: 64px;
+    height: 64px;
+    overflow: hidden;
+    border: dashed 1px;
+    display: table;
+    text-align: center;
+}
+
+.sym div {
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.safe {
+    width: 40px;
+    height: 40px;
+    content: url(/images/greenlock.png);
+    position: relative;
+    top: 8px;
+    left: -6px;
+}
+
+.unsafe {
+    width: 40px;
+    height: 40px;
+    content: url(/images/redlock.png);
+    position: relative;
+    top: 8px;
+    left: -6px;
+}
+
+.error-message {
+    padding: 10px;
+
+}
+.error-message p {
+    margin-bottom: 0;
+}
+
+.error .address-bar {
+    border: solid 1px red;
+}
+
+.loading,
+.loading:after {
+    border-radius: 50%;
+    width: 10em;
+    height: 10em;
+}
+.loading {
+    display: inline-block;
+    top: 9px;
+    left: -6px;
+    font-size: 4px;
+    position: relative;
+    text-indent: -9999em;
+    border-right: 0.51em solid rgba(255, 255, 255, 0.2);
+    border-left: 0.51em solid #023302;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: load8 0.61s infinite linear;
+    animation: load8 0.61s infinite linear;
+}
+@-webkit-keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.copy-anim {
+    cursor: none;
+    position: absolute;
+    transform-origin: bottom center;
+    background-color: darkseagreen;
+    border: solid 1px #def7ff;
+    border-radius: 14px;
+    width: 65px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    padding-bottom: 2px;
+    pointer-events: none;
+}
+.copy-animating {
+    position: absolute;
+    display: inline-block;
+}
+
+.copy-not-animating {
+    position: absolute;
+    display: none;
 }

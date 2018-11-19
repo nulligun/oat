@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { Button, Input, Label, Form, FormGroup } from 'reactstrap';
+import ClickToCopy from './ClickToCopy';
 
 const Web3 = require('web3');
-const util = require('ethjs-util');
 
 class TextSigner extends Component {
 	constructor(props) {
@@ -16,6 +17,7 @@ class TextSigner extends Component {
 			value: '',
 			signature: ''
 		};
+		this.sigTxt = React.createRef();
 	}
 
 	handleChange(event) {
@@ -75,11 +77,23 @@ class TextSigner extends Component {
 
 	render() {
 		return (<div className="text-signer">
-			<textarea value={this.state.value} onChange={this.handleChange} />
-			<button onClick={this.handleSubmit}>Sign</button>
-			<div className="signature">
+			<Form>
+				<FormGroup>
+					<h5>Text Signer</h5>
+			<Input id="txt-to-sign" type="textarea" value={this.state.value} onChange={this.handleChange} />
+					<Label for="txt-to-sign"><small>Enter some text and click Sign to use MetaMask to sign it.  This can help debug issues with the address_signature field of ETH based coins.</small></Label>
+					<div>
+			<Button color="warning" onClick={this.handleSubmit}>Sign with MetaMask</Button>
+					</div>
+				</FormGroup>
+			</Form>
+			{this.state.signature &&
+				<ClickToCopy txtRef={this.sigTxt}>
+			<div ref={this.sigTxt} className="signature">
 				{this.state.signature}
 			</div>
+				</ClickToCopy>
+			}
 		</div>)
 	}
 }
